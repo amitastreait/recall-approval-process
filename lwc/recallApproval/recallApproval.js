@@ -15,7 +15,6 @@ export default class RecallApproval extends NavigationMixin(LightningElement) {
     @wire(getApprovalSubmissionId, { recordId: '$recordId' })
     wiredData({ error, data }) {
       if (data && data.success) {
-        console.log('Data \n ', data);
         this.approvalSubmissionId = data.approvalSubmissionId;
       } else if (error) {
          console.error('Error:', error);
@@ -52,6 +51,7 @@ export default class RecallApproval extends NavigationMixin(LightningElement) {
         }
         this.isLoading = true;
         try {
+            console.log(this.comment);
             const result = await recallApprovalSubmission({
                 approvalSubmissionId: this.approvalSubmissionId,
                 comment: this.comment.trim()
